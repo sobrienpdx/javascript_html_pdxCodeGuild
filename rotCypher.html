@@ -6,8 +6,17 @@
 
   <body>
     <h1> Rotation Cypher<h1>
-    <h2>  </h2>
-    <h2 id="result"></h2>
+    <h2> What would you like to set your rotation to? <input id="rotation" type="number" value=13> </h2>
+    <h2> Enter the message you would like to encode: </h2>
+    <textarea id="uncodedMessage" rows="10" cols="100"></textarea>
+    <button id="btEncode">Encode!</button>
+    <h2> Encoded result:</h2>
+    <textarea id="codedResult" rows="10" cols="100"></textarea>
+    <h2> Enter a coded message you would like to decode: </h2>
+    <textarea id="codedMessage" rows="10" cols="100"></textarea>
+    <button id="btDecode">Decode!</button>
+    <h2> Decoded result:</h2>
+    <textarea id="uncodedResult" rows="10" cols="100"></textarea>
       <script src="rotCypher.js"> </script>
 
   </body>
