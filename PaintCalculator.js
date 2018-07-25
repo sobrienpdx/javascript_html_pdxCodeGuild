@@ -1,5 +1,4 @@
-let width =  document.getElementById("width")
-let height =  document.getElementById("height")
+
 // height = int(input("And the height in feet? "))
 // another_wall = input("Do you have any other walls to paint? y/n ")
 
@@ -29,18 +28,29 @@ let height =  document.getElementById("height")
 //     print("Your wall is {} sq ft. You will need {} gallon/s.".format(area, gallons_needed))
 //     return gallons_needed
 
-function calculate_gallons(width, height){
-      let area = width * height
-      return area
-    }
-// assing function return directly to document.get?
 
-let area = document.getElementById("area")
-alert(`You need to paint an area of ${calculate_gallons(width, height)}sq ft.`)
+function calculateArea(){
+  let width =  document.getElementById("width").value
+  let height =  document.getElementById("height").value
+  let area = width * height
+  return area
+}
 
-// function calculate_gallons(){
-//   let price_per_gallon = document.getElementById("price")
-//   let coat_number = document.getElementById("coats")
-//   let total = price_per_gallon * calculate_gallons() * coat_number
-//   return total
-// }
+function calculatePrice(area){
+  let gallons_needed = Math.floor(area / 400) + 1
+  let total = gallons_needed * document.getElementById("price").value * document.getElementById("coats").value
+  return total
+}
+
+
+document.getElementById("submitArea").addEventListener("click", function(){
+  let tellArea = document.getElementById("area")
+  tellArea.innerText =`You need to paint an area of ${calculateArea()} sq ft.`
+});
+
+
+document.getElementById("submitPaint").addEventListener("click", function(area_input){
+  let area = calculateArea()
+  let result = document.getElementById("result")
+  result.innerText = `You need ${calculatePrice(area)} dollars of paint.`
+});
