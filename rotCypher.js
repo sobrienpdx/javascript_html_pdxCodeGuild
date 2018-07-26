@@ -1,29 +1,29 @@
 
 let characters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
-"o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h",
-"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h",
-"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
-"o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h",
-"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h",
-"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+"o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-function getUncodedMessage(){
+
+function cypherMessage(operator, message){
   let rotation = parseInt(document.getElementById("rotation").value)
   let cypheredMessage = []
-  console.log(`cypheredMessage is ${cypheredMessage}`)
-  let messageList = document.getElementById("uncodedMessage").value.split("");
+  let messageList = message.value.split("");
+  console.log(messageList)
   for (let i=0; i<messageList.length; ++i) {
-      console.log(`messageList[i] is ${messageList[i]}`)
-      // cypheredMessage.push(messageList[i])
-      // console.log(cypheredMessage)
       if (messageList[i] != " "){
-          console.log(`characters.indexOf(messageList[i]) is ${characters.indexOf(messageList[i])}`)
-          let newIndex = parseInt(characters.indexOf(messageList[i])) + rotation
-          console.log(`characters.indexOf(messageList[i]) + rotation is ${characters.indexOf(messageList[i]) + rotation}` )
-          console.log(rotation)
-          cypheredMessage.push(characters[newIndex])
-          console.log(`characters[newIndex] is ${characters[newIndex]}`)
-          console.log(characters[newIndex])
+          if (operator == 'add'){
+            index = parseInt(characters.indexOf(messageList[i])) + rotation
+            let newIndex = index % 26
+            // let newIndex = (index > 25 ? index-26 : index)
+
+            cypheredMessage.push(characters[newIndex])
+          }
+          else if (operator == 'subtract'){
+            let index = parseInt(characters.indexOf(messageList[i])) - rotation
+            while (index < 0) {
+              index += 26
+            }
+            cypheredMessage.push(characters[index])
+          }
       }
       else {
           cypheredMessage.push(" ")
@@ -36,12 +36,17 @@ function getUncodedMessage(){
 }
 
 document.getElementById("btEncode").addEventListener("click", function(){
-  // console.log(getUncodedMessage())
-
   let codedResult = document.getElementById("codedResult")
-  codedResult.innerText =`${getUncodedMessage()}`
+  let message = document.getElementById("uncodedMessage")
+  codedResult.innerText =`${cypherMessage('add', message)}`
+
 })
 
+document.getElementById("btDecode").addEventListener("click", function(){
+  let codedResult = document.getElementById("uncodedResult")
+  let message = document.getElementById("codedMessage")
+  codedResult.innerText =`${cypherMessage('subtract', message)}`
+})
 
 
 //
