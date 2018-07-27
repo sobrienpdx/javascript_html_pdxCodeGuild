@@ -6,6 +6,7 @@ class Task {
     this.toggleState =toggleState
   }
 
+
   display(){
     //Create an ELEMENT
     let listItem = document.createElement("li")
@@ -25,7 +26,7 @@ class Task {
     removeBtn.addEventListener('click', (evt) => {
       this.removeItem(listItem)
     })
-  }
+}
 
   keepTrack(){
   listContainingAllTheToDoItemsToSave.push({ text : this.text, toggle : false} )
@@ -48,7 +49,7 @@ class Task {
   }
 }
 
-function createInstance(){
+function createNewInstance(){
   listItem = new Task(document.getElementById('item-to-add').value, false)
   listItem.display()
   listItem.keepTrack()
@@ -56,12 +57,28 @@ function createInstance(){
   document.getElementById("item-to-add").value=""
 }
 
+// get saved to-dos from local storage, parse them, create a new Task instance for each one
+window.addEventListener('DOMContentLoaded', (evt) => {
+  listContainingAllTheToDoItemsToSave = JSON.parse(localStorage.getItem('toDoList'))
+  console.log(listContainingAllTheToDoItemsToSave)
+  for (let i=0; i<listContainingAllTheToDoItemsToSave.length; i++){
+    listItem = new Task(listContainingAllTheToDoItemsToSave[i]["text"], listContainingAllTheToDoItemsToSave[i]["toggle"])
+    listItem.display()
+  }
+
+})
+
+
 document.getElementById("add").addEventListener("click", function(){
-  createInstance()
+  createNewInstance()
 });
 
 document.getElementById("item-to-add").addEventListener("keypress", function(e) {
     if (e.keyCode == 13) {
-      createInstance()
+      createNewInstance()
     }
 });
+
+window.addEventListener('beforeunload', (evt) => {
+  window.localStorage.setItem('toDoList', JSON.stringify(listContainingAllTheToDoItemsToSave))
+})
