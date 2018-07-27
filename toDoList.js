@@ -1,15 +1,24 @@
 
-class ToDoItems {
-  constructor() {
-    this.toDoItems = []
+class Task {
+  constructor(text, toggleState) {
+    this.text = text
+    this.toggleState =toggleState
   }
-  add(todo) {
-    this.toDoItems.push(todo)
+
+  display(){
+    let newTask = document.createElement("li")
+    newTask.appendChild(document.createTextNode(this.text))
+    //Make a "done" button, give that text, stick it on the ELEMENT
+    let markDoneBtn = document.createElement('button')
+    markDoneBtn.innerText = '\u2714'
+    newTask.appendChild(markDoneBtn)
+    //Make a "remove" button, give that text, stick it on the ELEMENT
+    let removeBtn = document.createElement('button')
+    removeBtn.innerText = '\u2717'
+    newTask.appendChild(removeBtn)
+    document.getElementById("to-do").appendChild(newTask);
   }
-  remove(todo) {
-    let idx = this.toDoItems.indexOf(todo)
-    this.toDoItems.splice(idx, 1)
-  }
+
 }
 
 
@@ -20,12 +29,13 @@ function addItem() {
     let itemToAdd = document.createElement("li");
     //Give the ELEMENT text
     let text = document.createTextNode(document.getElementById('item-to-add').value);
+    console.log(text)
     itemToAdd.appendChild(text);
     //Make a "done" button, give that text, stick it on the ELEMENT
     markDoneBtn = document.createElement('button')
     markDoneBtn.innerText = '\u2714'
     itemToAdd.appendChild(markDoneBtn)
-    //Make the 'done' button click add a class to ELEMENT for CS styling purposes
+    //Make the 'done' button click add a class to ELEMENT for CS styling purposes (MAKE THE TOGGLE SETTING IN toDoItems SET ITSELF ACCORDINGLY!!!!)
     markDoneBtn.addEventListener('click', function(evt){
       itemToAdd.classList.toggle('completed')
     })
@@ -33,17 +43,66 @@ function addItem() {
     removeBtn = document.createElement('button')
     removeBtn.innerText = '\u2717'
     itemToAdd.appendChild(removeBtn)
-    //Make the 'remove' button click erase ELEMENT
+    //Make the 'remove' button click erase ELEMENT (MAKE SURE TO REMOVE THE ELEMENT FROM toDoItems AS WELL!!!!!)
     removeBtn.addEventListener('click', function(evt){
       document.getElementById('to-do').removeChild(itemToAdd)
     })
     // Add  ELEMENT to the appropriate parent in html
     document.getElementById("to-do").appendChild(itemToAdd);
+
+    // store the text and "done" button toggle state of the ELEMENT in a list that can be saved in localStorage
+    // toDoItems.push(document.getElementById('item-to-add').value)
+    // console.log(toDoItems)
+
+
+    toDoItems.push( { "text" : document.getElementById('item-to-add').value, "toggle" : "false"} );
+    console.log(toDoItems)
+
 }
 
 
+// function addItem() {
+//     //Create an ELEMENT
+//     let itemToAdd = document.createElement("li");
+//     //Give the ELEMENT text
+//     let text = document.createTextNode(document.getElementById('item-to-add').value);
+//     console.log(text)
+//     itemToAdd.appendChild(text);
+//     //Make a "done" button, give that text, stick it on the ELEMENT
+//     markDoneBtn = document.createElement('button')
+//     markDoneBtn.innerText = '\u2714'
+//     itemToAdd.appendChild(markDoneBtn)
+//     //Make the 'done' button click add a class to ELEMENT for CS styling purposes (MAKE THE TOGGLE SETTING IN toDoItems SET ITSELF ACCORDINGLY!!!!)
+//     markDoneBtn.addEventListener('click', function(evt){
+//       itemToAdd.classList.toggle('completed')
+//     })
+//     //Make a "remove" button, give that text, stick it on the ELEMENT
+//     removeBtn = document.createElement('button')
+//     removeBtn.innerText = '\u2717'
+//     itemToAdd.appendChild(removeBtn)
+//     //Make the 'remove' button click erase ELEMENT (MAKE SURE TO REMOVE THE ELEMENT FROM toDoItems AS WELL!!!!!)
+//     removeBtn.addEventListener('click', function(evt){
+//       document.getElementById('to-do').removeChild(itemToAdd)
+//     })
+//     // Add  ELEMENT to the appropriate parent in html
+//     document.getElementById("to-do").appendChild(itemToAdd);
+//
+//     // store the text and "done" button toggle state of the ELEMENT in a list that can be saved in localStorage
+//     // toDoItems.push(document.getElementById('item-to-add').value)
+//     // console.log(toDoItems)
+//
+//
+//     toDoItems.push( { "text" : document.getElementById('item-to-add').value, "toggle" : "false"} );
+//     console.log(toDoItems)
+//
+// }
+
+
 document.getElementById("add").addEventListener("click", function(){
-  addItem()
+  // addItem()
+
+  // button event now needs to create a new instance of Task class, then call display()
+  new Task(document.getElementById('item-to-add').value, false).display()
   document.getElementById("item-to-add").value=""
 });
 
