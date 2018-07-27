@@ -1,9 +1,9 @@
 let listContainingAllTheToDoItemsToSave = []
 
 class Task {
-  constructor(text, toggleState) {
+  constructor(text, toggle) {
     this.text = text
-    this.toggleState =toggleState
+    this.toggle =toggle
   }
 
 
@@ -11,13 +11,9 @@ class Task {
     //Create an ELEMENT
     let listItem = document.createElement("li")
     listItem.appendChild(document.createTextNode(this.text))
-    //Make a "done" button, give that text, stick it on the ELEMENT
-    let markDoneBtn = document.createElement('button')
-    markDoneBtn.innerText = '\u2714'
-    listItem.appendChild(markDoneBtn)
-    markDoneBtn.addEventListener('click', (evt) => {
-      this.markAsDone(listItem)
-    })
+    if (this.toggle == true) {
+      listItem.classList.add('completed')
+    }
     //Make a "remove" button, give that text, stick it on the ELEMENT
     let removeBtn = document.createElement('button')
     removeBtn.innerText = '\u2717'
@@ -26,6 +22,14 @@ class Task {
     removeBtn.addEventListener('click', (evt) => {
       this.removeItem(listItem)
     })
+    //Make a "done" button, give that text, stick it on the ELEMENT
+    let markDoneBtn = document.createElement('button')
+    markDoneBtn.innerText = '\u2714'
+    listItem.appendChild(markDoneBtn)
+    markDoneBtn.addEventListener('click', (evt) => {
+      this.markAsDone(listItem)
+    })
+
 }
 
   keepTrack(){
