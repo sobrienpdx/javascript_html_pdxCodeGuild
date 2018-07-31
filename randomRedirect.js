@@ -15,7 +15,7 @@ let randomNumber= Math.floor((Math.random() * 10))
 console.log(randomNumber)
 
 
-let seconds = 4
+let seconds = 5
 window.onload = function() {
   setInterval(function(){
     document.getElementById("message").innerText=`${seconds}`
