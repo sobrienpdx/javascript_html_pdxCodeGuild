@@ -13,11 +13,17 @@ let websites = ["https://www.sharesloth.com/sloth-pictures", "http://www.worstca
 // window.location.replace = "https://www.worstcats.tumblr.com";
 let randomNumber= Math.floor((Math.random() * 10))
 console.log(randomNumber)
+
+
+let seconds = 4
 window.onload = function() {
-  setTimeout(function(){ document.getElementById("message").innerText="YOU WILL BE REDIRECTED TO A NEW PAGE IN 4 SECONDS" }, 1000);
-  setTimeout(function(){ document.getElementById("message").innerText="YOU WILL BE REDIRECTED TO A NEW PAGE IN 3 SECONDS" }, 2000);
-  setTimeout(function(){ document.getElementById("message").innerText="YOU WILL BE REDIRECTED TO A NEW PAGE IN 2 SECONDS" }, 3000);
-  setTimeout(function(){ document.getElementById("message").innerText="YOU WILL BE REDIRECTED TO A NEW PAGE IN 1 SECOND" }, 4000);
-  setTimeout(function(){ window.location = websites[randomNumber] }, 5000);
+  setInterval(function(){
+    document.getElementById("message").innerText=`${seconds}`
+    if (seconds === 0){
+      window.location = websites[randomNumber]
+    }
+  seconds --
+  },
+    1000);
 
 };
