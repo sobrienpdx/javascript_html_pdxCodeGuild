@@ -14,3 +14,9 @@ align-items: center;
   margin: 0;
   font-size: 30vw;
 }
+
+iframe {
+  width: 90vw;
+  height: 120vw;
+  margin: 1em;
+}
