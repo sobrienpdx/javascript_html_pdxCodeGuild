@@ -1,36 +1,24 @@
-// # Let’s represent an ATM with a class containing two attributes: a balance and an interest rate. A newly created account will default to a balance of 0 and an interest rate of 0.1%. Implement the initializer, as well as the following functions:
-// #
-// # check_balance() returns the account balance
-// # deposit(amount) deposits the given amount in the account
-// # check_withdrawal(amount) returns true if the withdrawn amount won’t put the account in the negative
-// # withdraw(amount) withdraws the amount from the account and returns it
-// # calc_interest() returns the amount of interest calculated on the account
+//Current functionality:
+// - creates a currentUser and tracks actions for that single user until page is refreshed
+// - deposit, withdraw, checkBalance
+// - (transaction history button is currently a decoy)
+// - ***NOTE: using jquery! Console cannot directly interface with program.***
+
+//possible improvements:
+//- push users to list and handle more than one at a time
+//- save JSON string to local storage to save info over sesions
+//- fix stupid changeBalance function to re-use the same box
+//- add transaction history by pushing events to a list
 
 $(document).ready(function(){ //beginning of jquery
 
 
-  class BankAccount { //start of class
-    constructor(name) {
-      this.name = name;
-      this.balance = 0;
-    }
-
-    // check_balance(){
-    //   ("The balance for {} is {}.".format(this.name, this.balance))
-    // }
-
-
-
-    // withdraw(amt){
-    //   if this.balance >= amt:
-    //       this.balance -= amt
-    //       print("After a withdrawl of {}, the balance for {} is {}.".format(amt, this.name, this.balance))
-    //       return this.balance
-    //   print("{}: You do not have enough funds for a withdrawl of {}. Current Balance is {}.".format(this.name, amt, this.balance))
-    // }
-
-
-  } //end of class
+class BankAccount { //start of class
+  constructor(name) {
+    this.name = name;
+    this.balance = 0;
+  }
+} //end of class
 
   // get username, create instance of BankAccount class
 let currentUser = null
@@ -46,42 +34,45 @@ function getCurrentUser(){
 }
 getCurrentUser()
 
-
+function changeBalance(action){
+  $(".more-buttons").append(`Amount to ${action}: <input id="amt">`);
+  $("#amt").keypress(function(e) {
+        if(e.which == 13) { //fix this so that if the amount box already exists it doesn't add another
+          if (action == "deposit"){
+            currentUser.balance += $("#amt").val()
+          }
+          else if (action == "withdraw"){
+            currentUser.balance -= $("#amt").val()
+          }
+          console.log(currentUser.balance)
+          $(".result").text(`The balance for ${currentUser.name} is ${currentUser.balance}`)
+        }
+  })
+}
 
 function deposit(){
   $('#deposit').click(function(){
     console.log(currentUser.name)
-    $(".more-buttons").append(`Amount to deposit: <input id="amt">`);
-    $("#amt").keypress(function(e) {
-          if(e.which == 13) { //fix this so that if the amount box already exists it doesn't add another
-            currentUser.balance += $("#amt").val()
-            console.log(currentUser.balance)
-            $(".result").text(`The balance for ${currentUser.name} is ${currentUser.balance}`)
-          }
-    })
+    changeBalance("deposit")
   })
 }
 deposit()
 
-John = new BankAccount('John')
-John.name
+function withdraw(){
+  $('#withdraw').click(function(){
+    console.log(currentUser.name)
+    changeBalance("withdraw")
+  })
+}
+withdraw()
 
-  //
-  // def calculate_interest():
-  //     print("Interest is 0.1%")
-  // deposit() {//a
-  //   $("#deposit").click(function(){ //b
-  //     $(".more-buttons").append(`Amount to deposit: <input id="amt">`);
-  //     $("#amt").enter
-  //     $("#amt").keypress(function(e) {//c
-  //       if(e.which == 13) {//d
-  //         let x = user.balance += $("#amt").val()
-  //         console.log($("#amt").val())
-  //       }//d
-  //     });//c
-  //   });//b
-  // }//a
-
+function checkBalance(){
+  $('#balance').click(function(){
+    console.log(currentUser.name)
+    $(".result").text(`The balance for ${currentUser.name} is $${currentUser.balance}`)
+  })
+}
+checkBalance()
 
 
 }); //end of jquery
