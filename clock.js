@@ -57,7 +57,9 @@ function stopwatch(){
 
 document.getElementById("start").addEventListener('click', (evt) => {
   let stop = stopwatch()
+  document.getElementById("start").setAttribute('disabled', true)
   document.getElementById("stop").addEventListener('click', (evt) => {
+    document.getElementById("start").removeAttribute('disabled')
     clearInterval(stop)
   })
 })
