@@ -36,6 +36,17 @@ document.getElementById("roll").addEventListener("click", function(){
     howMany --
     printTotal()
     document.getElementById("roll").innerText=('Add more')
-
+    document.getElementById("reset").removeAttribute('disabled')
   }
+})
+
+document.getElementById("reset").addEventListener("click", function(){
+  numsToTotal = []
+  document.getElementById("reset").setAttribute('disabled', 'pickleBananaSandwich')
+  document.getElementById("roll").innerText=('Roll')
+  let dice = document.getElementById("dice");
+  while (dice.firstChild) {
+      dice.removeChild(dice.firstChild);
+  }
+
 })
