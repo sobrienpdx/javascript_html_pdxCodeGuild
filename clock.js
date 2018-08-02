@@ -19,16 +19,15 @@
 // add function to pad seconds with 0
 // str.padStart(targetLentgth, [padString])
 
+// CLOCK
 //get the current time/date and store it in variables
 let now = new Date;
 let hour = now.getHours()
 let minutes = now.getMinutes()
 let seconds = now.getSeconds()
-
 function printCurrentTime(where){
   document.getElementById(where).innerText=(`${hour.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`)
 }
-
 setInterval(function(){
   now = new Date;
   hour = now.getHours()
@@ -37,12 +36,7 @@ setInterval(function(){
   printCurrentTime("time")
 }, 1000);
 
-let timer = new Date(0, 0, 0, 0, 0, 0);
-let hourTimer = timer.getHours()
-let minutesTimer = timer.getMinutes()
-let secondsTimer = timer.getSeconds()
-
-
+//TIMER
 function stopwatch(){
   let i =0;
   let intervalID = setInterval(function(){
@@ -53,8 +47,6 @@ function stopwatch(){
   }, 1000)
   return intervalID
 }
-
-
 document.getElementById("start").addEventListener('click', (evt) => {
   let stop = stopwatch()
   document.getElementById("start").setAttribute('disabled', true)
@@ -64,14 +56,20 @@ document.getElementById("start").addEventListener('click', (evt) => {
   })
 })
 
+//COUNTDOWN
+function countdown(){
+  let i =0;
+  let intervalID = setInterval(function(){
+    let today = new Date()
+    let dueDate = new Date(2018, 10, 26, 12, 0, 0);
+    let distance = dueDate - today
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("due").innerText=(`Days: ${days.toString().padStart(2, "0")} \nHours: ${hours.toString().padStart(2, "0")} \nMinutes: ${minutes.toString().padStart(2, "0")}\nSeconds: ${seconds.toString().padStart(2, "0")} \n!!!!!!!!!!!!`)
+    i++
+  }, 1000)
+}
 
-
-
-// setInterval(function(){
-//   printTimerTime()
-//   secondsTimer += 1
-// }, 1000);
-
-// function printTimerTime(){
-//   document.getElementById("timer").innerText=(`${hourTimer.toString().padStart(2, "0")}:${minutesTimer.toString().padStart(2, "0")}:${secondsTimer.toString().padStart(2, "0")}`)
-// }
+countdown()
