@@ -1,0 +1,40 @@
+body {
+  background-color: grey;
+  margin: 10px;
+}
+
+#dice button {
+  height: 70px;
+  width: 70px;
+  font-size: 100px;
+  background-color: grey;
+  border: none;
+  focus: none;
+}
+
+#dice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-height: 10em;
+}
+
+button {
+  height: 53px;
+  width: 98px;
+  margin: 10px;
+  font-size: 17px;
+  border: solid 1px black;
+}
+#title{
+  font-size: 50px;
+  margin-bottom: 0;
+}
+#dice h1 {
+  margin: 0;
+  height: 10px;
+}
+
+#dice button:focus, input:focus{
+    outline: none;
+}
