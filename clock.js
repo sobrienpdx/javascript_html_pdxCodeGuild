@@ -59,9 +59,10 @@ document.getElementById("start").addEventListener('click', (evt) => {
 //COUNTDOWN
 function countdown(){
   let i =0;
-  let intervalID = setInterval(function(){
+  setInterval(function(){
     let today = new Date()
-    let dueDate = new Date(2018, 10, 26, 12, 0, 0);
+    let dueDate = new Date(2018, 9, 26, 12, 0, 0);
+    console.log(dueDate)
     let distance = dueDate - today
     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -71,5 +72,4 @@ function countdown(){
     i++
   }, 1000)
 }
-
 countdown()
