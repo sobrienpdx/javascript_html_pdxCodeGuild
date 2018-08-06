@@ -32,3 +32,48 @@
         });
   }
   getLocation()
+
+  // let myHeaders = new Headers();
+  // myHeaders.append('Access-Control-Allow-Origin', '*')
+  // myHeaders.append('Vary', 'Origin')
+
+  function random(){
+    let num = Math.floor(Math.random() * 2000)
+    console.log(num)
+    return num
+  }
+let num =random()
+
+
+fetch(`http://xkcd.com/${num}/info.0.json`)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(xkcd) {
+    console.log(xkcd)
+    document.getElementById('title').innerText=(xkcd['title'])
+    document.getElementById('xkcd').src=(xkcd['img'])
+
+  });
+
+
+
+
+  // let myHeaders = new Headers();
+  // myHeaders.append('Access-Control-Allow-Origin', '*')
+//   myHeaders.append('Access-Control-Allow-Headers', 'Origin');
+//   // my.Headers.append("Origin", )
+//
+//
+//
+// //   header('Access-Control-Allow-Origin: *');
+// // header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+// // header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+//
+//   fetch('https://randomfox.ca/floof/?nocors', {'headers': myHeaders})
+//     .then(function(response) {
+//       return response.json();
+//     })
+//     .then(function(fox) {
+//       document.getElementById('fox').scr=(fox['link'])
+//     });
