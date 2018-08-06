@@ -15,13 +15,10 @@
 let score = 0
 
 function addPoints(){
-  console.log("you called addPoints")
   const moles = document.getElementsByTagName("img")
   for (let i=0; i<moles.length; i++) {
-    console.log(moles[i])
     moles[i].addEventListener('click', function(){
       if (moles[i].classList.contains("points")){
-        console.log("you clicked a mole with a points class")
         score += 100
         document.getElementById("score").innerText=`Score: ${score}`
       }
@@ -53,13 +50,21 @@ function mole(){
   }, time);
 }
 
-function lotsOfMoles(){
-  setInterval(function(){
+function lotsOfMoles(howFast, winLevel, level){
+  let stop = setInterval(function(){
     mole()
-  }, (1000));
+    console.log(level)
+    if (score > winLevel){
+      document.getElementById("level").innerText=`Level ${level +1}`
+      lotsOfMoles(howFast +500, (winLevel+1000), level++)
+      console.log(level)
+      clearInterval(stop)
+    }
+  }, howFast);
+
 }
 
 
 
 
-lotsOfMoles()
+lotsOfMoles(1000, 300, 1)
