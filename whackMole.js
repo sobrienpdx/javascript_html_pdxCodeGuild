@@ -14,6 +14,26 @@
 
 let score = 0
 
+function addPoints(){
+  console.log("you called addPoints")
+  const moles = document.getElementsByTagName("img")
+  for (let i=0; i<moles.length; i++) {
+    console.log(moles[i])
+    moles[i].addEventListener('click', function(){
+      if (moles[i].classList.contains("points")){
+        console.log("you clicked a mole with a points class")
+        score += 100
+        document.getElementById("score").innerText=`Score: ${score}`
+      }
+      else{
+        score-= 50
+        document.getElementById("score").innerText=`Score: ${score}`
+      }
+    })
+  }
+}
+addPoints()
+
 function randNum(){
   return Math.floor(Math.random() * 9)
 }
@@ -34,18 +54,12 @@ function mole(){
 }
 
 function lotsOfMoles(){
-  let interval = randTime()
   setInterval(function(){
     mole()
-  }, (interval + 250));
+  }, (1000));
 }
 
-function addPoints(){
-  document.getElementById("points").addEventListener('click', function(){
-  score += 100
-  document.getElementById("score").innerText=`Score: ${score}`
-  })
-}
+
 
 
 lotsOfMoles()
