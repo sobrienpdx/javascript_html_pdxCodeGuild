@@ -1,0 +1,72 @@
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+main * {
+  border-radius: 100%;
+  background: #232121;
+  height: 3em;
+  width: 70%;
+  box-shadow: 0 20px #464545 inset;
+  margin: 1em;
+}
+
+main img {
+
+}
+
+.mole {
+  box-shadow: 5px 10px 20px rgba(0,0,0,.4) inset;
+  background: brown;
+  width: 80px;
+  height: 100px;
+  border-top-right-radius: 100%;
+  border-top-left-radius: 100%;
+  position: absolute;
+  top: 200px;
+  left: 110px;
+  transition: all 2s;
+}
+.mole .eye {
+  background: #000;
+  width: 10px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  border-radius: 100%;
+}
+.mole:before{
+  content:'';
+  height: 20px;
+  left: 20px;
+  background: brown;
+  position: absolute;
+  left:-10px;
+  top: 60px;
+  z-index:10;
+}
+.mole .eye.left {
+  left: 20px;
+}
+.mole .eye.right {
+  right: 20px;
+}
+.mole .mouth {
+  background: red;
+  width: 40px;
+  height: 5px;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  border-radius: 100%;
+}
+.mole .mouth.open {
+  height: 20px;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.6) inset;
+}
+.mole.up {
+  top: 80px;
+}
