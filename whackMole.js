@@ -38,7 +38,7 @@ function randNum(){
 }
 
 function randTime(){
-  return Math.floor(Math.random() * 2500) + 3000
+  return Math.floor(Math.random() * 2500) + 2500
 }
 
 function mole(harderLevel){
@@ -55,12 +55,10 @@ function mole(harderLevel){
 function lotsOfMoles(harderLevel, winLevel, level){
   let stop = setInterval(function(){
     mole(harderLevel)
-    if (level == 2){
+    if (level == 5){
       document.getElementById("win").innerText="You win!!!!!"
       clearInterval(stop)
-      console.log("ok!")
       document.getElementById("main").classList.add("won")
-      console.log("?")
     }
     if (score > winLevel){
       document.getElementById("level").innerText=`Level ${level +1}`
