@@ -14,13 +14,15 @@
 
 let score = 0
 
-function addPoints(){
+function setUpPointListeners(){
   const moles = document.getElementsByTagName("img")
   for (let i=0; i<moles.length; i++) {
     moles[i].addEventListener('click', function(){
       if (moles[i].classList.contains("points")){
         score += 100
         document.getElementById("score").innerText=`Score: ${score}`
+        moles[i].classList.remove("points")
+        moles[i].src="emptySVG.svg"
       }
       else{
         score-= 50
@@ -29,7 +31,7 @@ function addPoints(){
     })
   }
 }
-addPoints()
+setUpPointListeners()
 
 function randNum(){
   return Math.floor(Math.random() * 9)
@@ -39,9 +41,10 @@ function randTime(){
   return Math.floor(Math.random() * 2500) + 500
 }
 
-function mole(){
+function mole(harderLevel){
   let num = randNum()
-  let time = randTime()
+  // let time = randTime() - harderLevel
+  let time = 5000 - harderLevel
   document.getElementById(num).src="mole.svg"
   document.getElementById(num).classList.add("points")
   setTimeout(function(){
@@ -50,21 +53,21 @@ function mole(){
   }, time);
 }
 
-function lotsOfMoles(howFast, winLevel, level){
+function lotsOfMoles(harderLevel, winLevel, level){
   let stop = setInterval(function(){
-    mole()
+    mole(harderLevel)
     console.log(level)
     if (score > winLevel){
       document.getElementById("level").innerText=`Level ${level +1}`
-      lotsOfMoles(howFast +500, (winLevel+1000), level++)
-      console.log(level)
+      lotsOfMoles((harderLevel+1000), (winLevel+500), (level+1))
+      console.log("I made it past the not recursive call")
       clearInterval(stop)
     }
-  }, howFast);
+  }, 1000);
 
 }
 
 
 
 
-lotsOfMoles(1000, 300, 1)
+lotsOfMoles(0, 300, 1)
