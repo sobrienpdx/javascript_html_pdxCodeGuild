@@ -14,10 +14,18 @@ main * {
   margin: 1em;
 }
 
-main img {
+.won {
+  background-color: pink;
+  background-image: url("win.png");
+  image: (url("win.png"));
 
 }
 
+#win {
+  font-size: 20em;
+  color: pink;
+}
+/*
 .mole {
   box-shadow: 5px 10px 20px rgba(0,0,0,.4) inset;
   background: brown;
@@ -69,4 +77,4 @@ main img {
 }
 .mole.up {
   top: 80px;
-}
+} */

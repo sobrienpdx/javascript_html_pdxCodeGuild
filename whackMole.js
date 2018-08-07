@@ -38,13 +38,12 @@ function randNum(){
 }
 
 function randTime(){
-  return Math.floor(Math.random() * 2500) + 500
+  return Math.floor(Math.random() * 2500) + 3000
 }
 
 function mole(harderLevel){
   let num = randNum()
-  // let time = randTime() - harderLevel
-  let time = 5000 - harderLevel
+  let time = randTime() - harderLevel
   document.getElementById(num).src="mole.svg"
   document.getElementById(num).classList.add("points")
   setTimeout(function(){
@@ -56,15 +55,19 @@ function mole(harderLevel){
 function lotsOfMoles(harderLevel, winLevel, level){
   let stop = setInterval(function(){
     mole(harderLevel)
-    console.log(level)
+    if (level == 2){
+      document.getElementById("win").innerText="You win!!!!!"
+      clearInterval(stop)
+      console.log("ok!")
+      document.getElementById("main").classList.add("won")
+      console.log("?")
+    }
     if (score > winLevel){
       document.getElementById("level").innerText=`Level ${level +1}`
       lotsOfMoles((harderLevel+1000), (winLevel+500), (level+1))
-      console.log("I made it past the not recursive call")
       clearInterval(stop)
     }
   }, 1000);
-
 }
 
 
