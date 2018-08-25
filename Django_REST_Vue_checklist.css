@@ -1,0 +1,17 @@
+* {
+	color:green;
+}
+
+.completed {
+	text-decoration: line-through;
+}
+
+li {
+	border: 1px solid;
+	margin: 1em;
+	list-style-type: none;
+	padding-left: .5em;
+}
+pre {
+	 white-space: pre-wrap;
+}
