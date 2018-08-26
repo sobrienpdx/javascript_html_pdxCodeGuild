@@ -16,21 +16,30 @@
           <h1>{{ heading }}</h1>
 
           <div class="holder">
-              <!-- Hint: modify this input to handle addTodo() -->
-              <input
+						<button id="top" class="see_django" v-on:click="showDjango">Basic Django Setup</button>
+						<button id="top" class="see_Rest" v-on:click="showRest">REST Setup</button></br>
+              <input id="search"
                 type="text"
                 placeholder="Search..."
-                v-on:keyup.enter="search"
+                v-on:keyup="search"
                 v-model="query"
               />
+							<ul class="results">
+                  <li
+                  v-for="result in results"
+                  v-bind:class="{completed: result.completed}"
+                  >
+									<pre v-html='result.textForToDo'></pre>
+							</ul>
+<h2>Steps:</h2>
               <ul class="item">
                   <li
                   v-for="(x, index) in toDos"
                   v-bind:class="{completed: x.completed}"
                   v-bind:index="index"
                   >
-                    <pre>{{x.textForToDo}}</pre>
-                    <button class="done" v-on:click="markDone(index)">Strikethrough</button>
+									  <pre v-html='x.textForToDo'></pre>
+                    <button class="done" v-on:click="markDone(index)">Strike</button>
                     <button class="remove" v-on:click="removeToDo(index)">Done</button>
                 </li>
               </ul>
